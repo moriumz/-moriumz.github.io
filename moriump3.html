@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playpen+Sans:wght@100&display=swap" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100&display=swap" rel="stylesheet"><link href='font-family: 'Playpen Sans', cursive;' rel='stylesheet' type='text/css'>
+<style>
+       input {
+	   font-size: 22px;
+	}
+body {
+  font-family: helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 600px;
+  background: pink;
+}
+div {
+  height: 350px;
+  background-size: 100% 100%;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Playpen Sans';
+  text-align: center;
+  font-size: 75px;
+  color: #800080;
+  margin: 60px 0 0 0;
+}
+h2 {
+  font-family: 'Playpen Sans';
+  text-align: center;
+  color: #800080;
+  margin: 0px 0 70px 0;
+}
+p {
+  font-family: 'Caveat', cursive;
+  color: blue;
+  background: rgba(137,207,240,0.5);
+  background: linear-gradient(bottom, rgba(137, 207, 240, 1), rgba(137, 207, 240, 0.4));
+  background: -webkit-linear-gradient(bottom, rgba (137, 207, 240, 1),rgba(137, 207, 240,.4));
+  background: -moz-linear-gradient(bottom, rgba (137, 207, 240, 1),rgba(137, 207, 240, 0));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+}
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+.first{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiKBZVt_wiHErN79RfLw_ihrendvogg8kK3w&s");
+}
+.second{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvmuczioHjczBgmKz1aD8oUFDaBa6Nax1U4w&s");
+}
+.Keychain{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSErfNpBHQBO-NqSHjXFBv4YXiQD2uQasknEw&s");
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  small {
+    font-size: 16px;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>Morium's Butterfly</h1>
+<h2>a New York City Heaven</h2>
+
+<div class="first">
+  <p>Butterfly Handbag <span class="price">$22</span><br />
+  <small>We sell all types of Butterfly handbag in affordable prices. We have different colors and customers can customize it.  </small></p>
+<input class="quantities" type="number" min="0" style="width: 50px"></div>
+
+<div class="second">
+  <p>Butterfly Bracelet <span class="price">$14</span><br />
+  <small>We have different type of butterfly bracelet in different colors for all ages. You can costomize it the way you want.</small></p>
+<input class="quantities"type="number" min="0" style="width: 50px"></div>
+
+<div class="Keychain">
+  <p>Key chian  <span class="price">$8</span><br />
+  <small> We have diiferent types of keychain for kids and adults . You can customize it the way you want. Also, we give free keychain to first purchuse in out shop. You can also customize your name on it. You have to pay extra 3 dollars for it .</small></p>
+<input class="quantities"type="number" min="0" style="width: 50px"></div>
+<br><br>
+<input id="Name" placeholder="Your name">
+<input id="Email" placeholder="Your email">
+<input id="submit" type="submit">
+<br><br>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB5QUi_tqAM_PR2D5IUXGDja37L4kP6zdw",
+    authDomain: "butterfly-eb014.firebaseapp.com",
+    projectId: "butterfly-eb014",
+    storageBucket: "butterfly-eb014.appspot.com",
+    messagingSenderId: "112192963870",
+    appId: "1:112192963870:web:298a8c049abdb498feb50f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const Name = document.querySelector("#Name") 
+    const Email = document.querySelector("#Email")
+    const quantities = document.querySelectorAll(".quantities") 
+    const itemsList = ["Butterfly Handbag", "Butterfly Beacelet", "Key Chain"] 
+  document.querySelector('#submit').addEventListener('click', Submit)
+  const prices = document.querySelectorAll(".price") 
+
+  
+    function Submit() {
+       const timestamp = buildTimestamp()
+        let total = 0
+	   let cart = { }
+      
+
+       
+
+	  for  (let i=0; i<quantities.length; i=i+1) {
+	  	if (quantities[i].value != "0" && quantities[i].value != "") {	
+            let price = prices[i].innerHTML.replace('$', '')
+			  total = total + quantities[i].value * price 
+            
+	  		cart[itemsList[i]] = parseInt(quantities[i].value) 
+	  	}
+	  	quantities[i].value = ""
+	  }
+       
+       set(ref(db, timestamp), {
+    	    Name: Name.value,
+    	  email: Email.value,
+	       cart: cart,
+           totalPrice: total,
+		   paid: "not yet",
+
+           
+       });
+
+        Name.value = ""
+        Email.value = ""
+        }
+
+    function buildTimestamp() {
+  		  const now = new Date();
+  		  let timestamp = now.getFullYear().toString() + "/";
+  		  //const month = now.toLocaleString('default', { month: 'long' });
+
+
+		  
+
+  		  let month = now.getMonth()+1   //add 1 because Javascrip
+  		  // t uses 0 for January
+  		  month = month.toString()
+  		  month = addLeadingZero(month)
+  		  timestamp += month + "/"; 
+
+  		  let date = now.getDate().toString()
+  		  date = addLeadingZero(date)
+  		  timestamp += date + "/";
+
+  		  let hours = now.getHours().toString()
+  		  hours = addLeadingZero(hours)
+  		  timestamp += hours + ":";
+
+  		  let minutes = now.getMinutes().toString()
+  		  minutes = addLeadingZero(minutes)
+  		  timestamp += minutes + ":";
+
+  		  let seconds = now.getSeconds().toString()
+  		  seconds = addLeadingZero(seconds)
+  		  timestamp += seconds;
+  
+  		  return timestamp
+  		}
+	
+   function addLeadingZero(units) {
+  			if (units.length < 2) {
+  				units = "0" + units
+  			}
+  			return units
+  		}
+  
+</script>
+
+</body>
